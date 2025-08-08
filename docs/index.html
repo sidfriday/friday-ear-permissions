@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FridayEAR Cloud</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FridayEAR Cloud</h1>
+        <select id="provider">
+            <option value="openai">ChatGPT (OpenAI)</option>
+            <option value="gemini">Gemini (Google)</option>
+            <option value="anthropic">Claude (Anthropic)</option>
+        </select>
+        <textarea id="prompt" placeholder="Type your question..."></textarea>
+        <button onclick="askAI()">Ask</button>
+        <pre id="response"></pre>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
