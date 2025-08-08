@@ -1,0 +1,26 @@
+name: Heartbeat Auto-Deploy
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 9 * * *"     # every day at 09:00 UTC
+  workflow_dispatch:         # allows manual run from Actions if you ever want it
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # allows commit with GITHUB_TOKEN
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update last-deployed.txt
+        run: |
+          printf "Last deploy heartbeat: %s\n" "$(date -u '+%Y-%m-%d %H:%M:%S UTC')" > last-deployed.txt
+
+      - name: Commit & push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: heartbeat auto-deploy"
+          file_pattern: last-deployed.txt
